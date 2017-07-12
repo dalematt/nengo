@@ -315,7 +315,8 @@ class LIFRate(NeuronType):
         """Compute the inverse of gain_bias."""
         intercepts = (1 - bias) / gain
         max_rates = 1.0 / (self.tau_ref - self.tau_rc * np.log1p(
-            -1.0 / (1 - gain * (intercepts - 1))))
+            1.0 / (gain * (intercepts - 1) - 1)))
+        max_rates = np.nan_to_num(max_rates)
         return max_rates, intercepts
 
     def rates(self, x, gain, bias):
