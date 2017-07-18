@@ -42,16 +42,16 @@ class NeuronType(FrozenObject):
 
         Parameters
         ----------
-        max_rates : ndarray(dtype=float64)
+        max_rates : ndarray
             Maximum firing rates of neurons.
-        intercepts : ndarray(dtype=float64)
+        intercepts : ndarray
             X-intercepts of neurons.
 
         Returns
         -------
-        gain : ndarray(dtype=float64)
+        gain : ndarray
             Gain associated with each neuron. Sometimes denoted alpha.
-        bias : ndarray(dtype=float64)
+        bias : ndarray
             Bias current associated with each neuron.
         """
         J_max = 0
@@ -98,16 +98,16 @@ class NeuronType(FrozenObject):
 
         Parameters
         ----------
-        gain : ndarray(dtype=float64)
+        gain : ndarray
             Gain associated with each neuron. Sometimes denoted alpha.
-        bias : ndarray(dtype=float64)
+        bias : ndarray
             Bias current associated with each neuron.
 
         Returns
         -------
-        max_rates : ndarray(dtype=float64)
+        max_rates : ndarray
             Maximum firing rates of neurons.
-        intercepts : ndarray(dtype=float64)
+        intercepts : ndarray
             X-intercepts of neurons.
         """
 
@@ -131,11 +131,11 @@ class NeuronType(FrozenObject):
 
         Parameters
         ----------
-        x : ndarray(dtype=float64)
+        x : ndarray
             Vector-space input.
-        gain : ndarray(dtype=float64)
+        gain : ndarray
             Gains associated with each neuron.
-        bias : ndarray(dtype=float64)
+        bias : ndarray
             Bias current associated with each neuron.
         """
         J = gain * x + bias
@@ -154,9 +154,9 @@ class NeuronType(FrozenObject):
         ----------
         dt : float
             Simulation timestep.
-        J : ndarray(dtype=float64)
+        J : ndarray
             Input currents associated with each neuron.
-        output : ndarray(dtype=float64)
+        output : ndarray
             Output activities associated with each neuron.
         """
         raise NotImplementedError("Neurons must provide step_math")
