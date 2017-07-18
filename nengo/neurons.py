@@ -1,6 +1,7 @@
 from __future__ import division
 
 import logging
+import warnings
 
 import numpy as np
 
@@ -316,7 +317,9 @@ class LIFRate(NeuronType):
         intercepts = (1 - bias) / gain
         max_rates = 1.0 / (self.tau_ref - self.tau_rc * np.log1p(
             1.0 / (gain * (intercepts - 1) - 1)))
-        max_rates = np.nan_to_num(max_rates)
+        if not np.all(np.isfinite(max_rates)):
+            warnings.warn("Non-finite values detected in `max_rates`; this "
+                          "probably means that `gain` was too small.")
         return max_rates, intercepts
 
     def rates(self, x, gain, bias):
