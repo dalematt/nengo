@@ -68,7 +68,7 @@ class NeuronType(FrozenObject):
             J_max += 10
             J = np.linspace(-J_max, J_max, J_steps)
             rate = self.rates(J, gain, bias)
-        J_threshold = J[np.where(rate <= 1e-16)[0][-1]]
+        J_threshold = J[np.where(rate <= 0)[0][-1]]
 
         gain = np.zeros_like(max_rates)
         bias = np.zeros_like(max_rates)
@@ -116,7 +116,7 @@ class NeuronType(FrozenObject):
         x_range = np.linspace(-1, 1, 101)
         rates = np.asarray([self.rates(np.ones_like(gain) * x, gain, bias)
                             for x in x_range])
-        last_zeros = np.maximum(np.argmax(rates > 1e-16, axis=0) - 1, 0)
+        last_zeros = np.maximum(np.argmax(rates > 0, axis=0) - 1, 0)
         intercepts = x_range[last_zeros]
 
         return max_rates, intercepts
